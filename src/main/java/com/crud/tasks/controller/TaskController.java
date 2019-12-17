@@ -14,7 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/v1/task")
-@CrossOrigin("https://msajkiewicz.github.io/")
+@CrossOrigin(value = {"msajkiewicz.github.io"})
 public class TaskController {
     @Autowired
     private DbService service;
