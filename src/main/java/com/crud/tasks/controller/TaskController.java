@@ -11,9 +11,10 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@CrossOrigin("*")
+
 @RestController
 @RequestMapping("/v1/task")
+@CrossOrigin("https://msajkiewicz.github.io/")
 public class TaskController {
     @Autowired
     private DbService service;
