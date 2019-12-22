@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -19,15 +18,16 @@ import java.util.stream.Collectors;
         private TrelloClient trelloClient;
 
         @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
-        public Optional<List<TrelloBoardDto>> getTrelloBoards() {
+        public List<TrelloBoardDto> getTrelloBoards() {
 
             List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
 
             List<TrelloBoardDto> filteredTrelloBoards = trelloBoards.stream().filter(t -> t.getId()!=null)
                     .filter(t->t.getName()!=null)
+                    .filter(t->t.getName().contains("Kodilla"))
                     .collect(Collectors.toList());
 
-            return Optional.of(filteredTrelloBoards);
+            return filteredTrelloBoards;
         }
     }
 
