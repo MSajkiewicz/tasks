@@ -18,7 +18,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.Silent.class)
+@RunWith(MockitoJUnitRunner.class)
 public class TrelloClientTest {
     @InjectMocks
     private TrelloClient trelloClient;
@@ -88,7 +88,7 @@ public class TrelloClientTest {
     @Test
     public void shouldReturnEmptyList() throws URISyntaxException {
         //Given
-        URI uri = new URI("http://test.com/cards?key=test&token=test&name=Test%20task&desc=Test%20description&pos=top&idList=test_id");
+        URI uri = new URI("http://test.com/members/MSajkiewicz/boards?key=test&token=test&fields=name,id&lists=all");
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
 
         //When
