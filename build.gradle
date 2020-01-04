@@ -15,18 +15,24 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	//SpringBoot
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.2.1.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.2.1.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.1.RELEASE'
+	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.2.1.RELEASE'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') { exclude group: 'org.junit.vintage', module: 'junit-vintage-engine' }
+
+	//Lombok
 	annotationProcessor('org.projectlombok:lombok')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compileOnly('org.projectlombok:lombok')
-	compile('mysql:mysql-connector-java')
+
+	//Swagger
 	compile('io.springfox:springfox-swagger2:2.7.0')
 	compile('io.springfox:springfox-swagger-ui:2.7.0')
-	compile('org.springframework.boot:spring-boot-starter-mail:1.5.7.RELEASE')
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.2.1.RELEASE'
+
+
+	//MySQL
+	compile('mysql:mysql-connector-java')
 
 	//compile('org.postgresql:postgresql')
 	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")

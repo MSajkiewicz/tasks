@@ -1,7 +1,8 @@
+
 package com.crud.tasks.service;
 
 import com.crud.tasks.domain.Mail;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -35,6 +36,4 @@ class SimpleEmailServiceTest {
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);
     }
-
-
 }
