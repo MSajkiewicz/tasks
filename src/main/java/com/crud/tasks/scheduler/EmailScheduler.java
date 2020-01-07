@@ -25,11 +25,7 @@ public class EmailScheduler {
     public void sendInformationEmail() {
         String singularOrPlural = "";
         long size = taskRepository.count();
-        if(size!=1) {
-            singularOrPlural = " tasks";
-        } else {
-            singularOrPlural = " task";
-        }
+        singularOrPlural = (size == 1) ? " task" : " tasks";
         simpleEmailService.send(new Mail(adminConfig.getAdminMail(), null, SUBJECT, "Curently in database You have " + size + singularOrPlural));
     }
 }
