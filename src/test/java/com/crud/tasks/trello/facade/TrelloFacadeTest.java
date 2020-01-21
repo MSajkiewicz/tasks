@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-class TrelloFacadeTest {
+public class TrelloFacadeTest {
     @InjectMocks
     private TrelloFacade trelloFacade;
 
@@ -101,4 +101,6 @@ class TrelloFacadeTest {
             });
         });
     }
+
+
 }
