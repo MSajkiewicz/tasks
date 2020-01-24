@@ -27,6 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(TaskController.class)
 class TaskControllerTest {
+    private Task task = new Task(1L, "Title", "Content");
+    private TaskDto taskDto = new TaskDto(1L, "Title", "Content");
 
     @Autowired
     private MockMvc mockMvc;
@@ -37,14 +39,16 @@ class TaskControllerTest {
     @MockBean
     private TaskMapper taskMapper;
 
+    @Autowired
+    private Gson gson;
 
     @Test
-    void getTasks() throws Exception{
+    void getTasksTest() throws Exception{
         //Given
         List<Task> taskList = new ArrayList<>();
-        taskList.add(new Task(1L, "Title", "Content"));
+        taskList.add(task);
         List<TaskDto> taskDtoList = new ArrayList<>();
-        taskDtoList.add(new TaskDto(1L, "Title", "Content"));
+        taskDtoList.add(taskDto);
 
         when(service.getAllTasks()).thenReturn(taskList);
         when(taskMapper.mapToTaskDtoList(taskList)).thenReturn(taskDtoList);
@@ -59,11 +63,8 @@ class TaskControllerTest {
     }
 
     @Test
-    void getTask() throws Exception {
+    void getTaskTest() throws Exception {
         //Given
-        Task task = new Task(1L, "Title", "Content");
-        TaskDto taskDto = new TaskDto(1L, "Title", "Content");
-
         when(service.getTask(1L)).thenReturn(task);
         when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
 
@@ -76,11 +77,10 @@ class TaskControllerTest {
     }
 
     @Test
-    void deleteTask() throws Exception {
-        //given
-        Task task = new Task(1L, "Title", "Content");
+    void deleteTaskTest() throws Exception {
+        //Given
 
-        //when & then
+        //When & Then
         mockMvc.perform(delete("/v1/task/deleteTask").param("taskId", "1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -88,33 +88,25 @@ class TaskControllerTest {
     }
 
     @Test
-    void updateTask() throws Exception {
+    void updateTaskTest() throws Exception {
         //Given
-        TaskDto taskDto = new TaskDto(1L, "Test", "Content");
-        Task task = new Task();
-
         when(taskMapper.mapToTask(any())).thenReturn(task);
         when(service.saveTask(task)).thenReturn(any());
         when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
-
-        Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDto);
 
         //When & Then
         mockMvc.perform(put("/v1/task/updateTask").content(jsonContent).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.title", is("Test")))
+                .andExpect(jsonPath("$.title", is("Title")))
                 .andExpect(jsonPath("$.content", is("Content")));
     }
 
     @Test
-    void createTask() throws Exception {
+    void createTaskTest() throws Exception {
         //Given
-        TaskDto taskDto = new TaskDto(1L,"Task","Content");
-        Task task = new Task(1L,"Task","Content");
         when(service.saveTask(taskMapper.mapToTask(any(TaskDto.class)))).thenReturn(task);
-        Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDto);
 
         //When &Then
@@ -122,7 +114,7 @@ class TaskControllerTest {
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.title", is("Task")))
+                .andExpect(jsonPath("$.title", is("Title")))
                 .andExpect(jsonPath("$.content", is("Content")));
     }
 }
