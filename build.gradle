@@ -21,7 +21,7 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.1.RELEASE'
 	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.2.1.RELEASE'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') { exclude group: 'org.junit.vintage', module: 'junit-vintage-engine' }
-
+	compile('org.springframework.boot:spring-boot-starter-actuator')
 	//Lombok
 	annotationProcessor('org.projectlombok:lombok')
 	compileOnly('org.projectlombok:lombok')
@@ -35,7 +35,6 @@ dependencies {
 
 	//Gson
 	compile('com.google.code.gson:gson:2.8.2')
-
 
 	//compile('org.postgresql:postgresql')
 	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
