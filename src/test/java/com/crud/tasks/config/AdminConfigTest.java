@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestPropertySource(properties = {"admin.mail=test@test.com"})
 public class AdminConfigTest {
     @Autowired
-    private AdminConfig adminConfig = new AdminConfig();
+    private AdminConfig adminConfig;
 
     @Test
     public void testGetAdminMail() {
