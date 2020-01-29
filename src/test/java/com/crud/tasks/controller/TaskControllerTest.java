@@ -43,7 +43,8 @@ class TaskControllerTest {
     private Gson gson;
 
     @Test
-    void getTasksTest() throws Exception{
+    void getTasksTest() throws Exception {
+
         //Given
         List<Task> taskList = new ArrayList<>();
         taskList.add(task);
@@ -69,7 +70,8 @@ class TaskControllerTest {
         when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
 
         //When && Then
-        mockMvc.perform(get("/v1/task/getTask").param( "taskId", "1").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/task/getTask").param("taskId", "1").contentType(MediaType.APPLICATION_JSON))
+
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is("Title")))
@@ -113,8 +115,7 @@ class TaskControllerTest {
         mockMvc.perform(post("/v1/task/createTask").contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.title", is("Title")))
-                .andExpect(jsonPath("$.content", is("Content")));
+                .andExpect(status().isOk());
+
     }
 }
