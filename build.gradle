@@ -30,8 +30,9 @@ dependencies {
 	compile('io.springfox:springfox-swagger2:2.7.0')
 	compile('io.springfox:springfox-swagger-ui:2.7.0')
 
-	//MySQL
+	//MySQL + TOMCAT
 	//compile('mysql:mysql-connector-java')
+	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
 	//Gson
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
@@ -40,7 +41,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
 	compile('org.postgresql:postgresql')
-	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
 }
 
 test {
